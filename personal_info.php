@@ -14,13 +14,13 @@ $array = [
         'City'       => 'Vellakovil'
         
     ),
-    
+
     'address_2' =>array(
     
-        'Door no'     => '123',
-        'Street Name '=> 'Anna st',
-        'Area'       => 'Puthur',
-        'City'       => 'Vellakovil'
+        'Door no'     => '321',
+        'Street Name '=> 'Raman st',
+        'Area'       => 'Karur',
+        'City'       => 'Mangalam'
     )
 ];
 
