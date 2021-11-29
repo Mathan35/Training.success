@@ -10,7 +10,6 @@ while($m<15){
     echo $ans<15? $ans."\n":'';
     $n = $m;
     $m = $ans;
-
 }
 
 ?>
