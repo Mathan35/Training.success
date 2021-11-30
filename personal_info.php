@@ -4,7 +4,7 @@ $array = [
    
     'name'     =>  'Mathankumar',
 
-    'Email'    =>  'bmathan777@gmail.com',
+    'email'    =>  'bmathan777@gmail.com',
    
     'address_1' =>array(
     
@@ -21,9 +21,31 @@ $array = [
         'Street Name' => 'Raman st',
         'Area'        => 'Karur',
         'City'        => 'Mangalam'
+    ),
+
+    'Phone Number' =>array(
+    
+        'One'     => '9878787878',
+        'Two' => '8756879987',
     )
 ];
 
-print_r($array); die();
+echo "Your Name : ".$array['name']."\n";
+echo "Your Email : ".$array['email']."\n  \n";
 
+echo "Your address 1 :"."\n";
+echo "Your Door no : ".$array['address_1']['Door no']."\n";
+echo "Your Street Name : ".$array['address_1']['Street Name']."\n";
+echo "Your Area : ".$array['address_1']['Area']."\n";
+echo "Your City : ".$array['address_1']['City']."\n  \n";
+
+echo "Your address 2 :"."\n";
+echo "Your Door no : ".$array['address_2']['Door no']."\n";
+echo "Your Street Name : ".$array['address_2']['Street Name']."\n";
+echo "Your Area : ".$array['address_2']['Area']."\n";
+echo "Your City : ".$array['address_2']['City']."\n  \n";
+
+echo "Your Phone Number :"."\n";
+echo "One: ".$array['Phone Number']['One']."\n";
+echo "Two: ".$array['Phone Number']['Two']."\n";
 ?>
