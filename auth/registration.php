@@ -7,6 +7,7 @@
     <title>Registration</title>
 </head>
 <body>
+    
 <div style = "border:1px solid black; width:fit-content; margin:30px;">
 <div style = "padding:20px;">
 
