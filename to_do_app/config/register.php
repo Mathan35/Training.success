@@ -1,14 +1,9 @@
 <?php
         session_start();
 
-        $servername = "127.0.0.1";
-        $username = "root";
-        $password = "";
-        $database = "to_do_app";
- 
-		 // Create connection
-         $conn = mysqli_connect($servername, $username, $password,$database);
-  
+        //connect db
+        include('config.connect_db');
+
 		// Check connection
 		if($conn === false){
 			die("ERROR: Could not connect. "
@@ -36,4 +31,4 @@
 		// Close connection
 		mysqli_close($conn);
 
-		?>
+?>

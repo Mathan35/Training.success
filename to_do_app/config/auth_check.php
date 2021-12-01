@@ -1,8 +1,7 @@
 <?php
 session_start();
-
 if($_SESSION['email'] == NULL){
-    header('location:auth.login.php');
-}
+    header('location:./auth/login.php');
+  }
 
 ?>

@@ -12,7 +12,7 @@
 <div style = "border:1px solid black; width:fit-content; margin:30px;">
 <div style = "padding:20px;">
 
-<form action="../config/check_user.php" method="post">
+<form action="../config/check_user.php" method="POST">
 <h1>Login</h1>
 
 <p style = "color:red; text:bold"><?php  session_start(); echo $_SESSION['login_error']?></p>
@@ -35,16 +35,11 @@
 <?php
 
 if($_SESSION['email'] != NULL){
-    header('location:index.php');
+    header('location:../index.php');
 }
 
-$servername = "127.0.0.1";
-$username = "root";
-$password = "";
-$database = "to_do_app";
-
-// Create connection
-$conn = mysqli_connect($servername, $username, $password,$database);
+//connect db
+include('config.connect_db');
 
 $sqltable = "CREATE TABLE users (
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,

@@ -11,7 +11,7 @@
 <div style = "padding:20px;">
 
 
-<form action="register.php" method="post">
+<form action="../config/register.php" method="post">
 
 <h1>Registration</h1>
 
@@ -38,17 +38,11 @@
 session_start();
 
 if($_SESSION['email'] != NULL){
-    header('location:index.php');
+    header('location:../index.php');
 }
 
-$servername = "127.0.0.1";
-$username = "root";
-$password = "";
-$database = "to_do_app";
-
-// Create connection
-$conn = mysqli_connect($servername, $username, $password,$database);
-
+//connect db
+include('config.connect_db');
 
 
 $sqltable = "CREATE TABLE users (
@@ -66,7 +60,7 @@ $sqltable = "CREATE TABLE users (
  }
 
  if(!empty($_SESSION['email'])){
-    header('location:index.php');
+    header('location:../index.php');
 }
 
 ?>
