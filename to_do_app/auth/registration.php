@@ -7,22 +7,23 @@
     <title>Registration</title>
 </head>
 <body>
+
 <div style = "border:1px solid black; width:fit-content; margin:30px;">
 <div style = "padding:20px;">
 
 
-<form action="../config/register.php" method="post">
+<form action="../config/Authentication/Registration.php" method="post">
 
 <h1>Registration</h1>
 
 <label for="user_name">User Name</label> <br>
-<input type="text" name="user_name" id="" required> <br>
+<input type="text" name="users_name" id="" required> <br>
 
 <label for="user_name">Email</label><br>
 <input type="email" name="email" id="" required> <br>
 
 <label for="user_name">Create Password</label> <br>
-<input type="password" name="password" id="" required> <br><br>
+<input type="password" name="passwords" id="" required> <br><br>
 
 <button type="submit">Sign Up</button>
 
@@ -32,38 +33,6 @@
 
 </div>
 </div>
-
-
-<?php
-session_start();
-
-if($_SESSION['email'] != NULL){
-    header('location:../index.php');
-}
-
-//connect db
-include('config.connect_db');
-
-
-$sqltable = "CREATE TABLE users (
-    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    users_name VARCHAR(100) NOT NULL,
-    email VARCHAR(100) NOT NULL,
-    passwords VARCHAR(100) NOT NULL,
-    reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-    )";
- mysqli_query($conn, $sqltable);
- $created = mysql_query( $sqltable, $conn );
- 
- if(! $created ) {
-    die('Could not create database: ' . mysql_error());
- }
-
- if(!empty($_SESSION['email'])){
-    header('location:../index.php');
-}
-
-?>
     
 </body>
 </html>
