@@ -30,11 +30,6 @@ class Laptop{
         return $this->screenSize = '15.6 inch';
     }
 
-    //clearing memory
-    // function __destruct(){
-    //     echo "clear memory";
-    // }
-
 }
 
 
@@ -125,20 +120,18 @@ echo $area->ticket()."\n";
 
 
 
-
 //static
 class Calculate{
     static $number = 10;
-    static function add($a,$b){
+    static $number1= 10;
+
+    public static function add(){
         // return self::$number;
-        return $a+$b;
+        return self::$number + self::$number1;
     }
 }
 echo "static function"."\n";
-echo Calculate::add(10,20)."\n";
-echo Calculate::$number;
+echo Calculate::add()."\n";
+// echo Calculate::$number;
 ?>
-
-
-
 

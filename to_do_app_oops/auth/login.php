@@ -1,7 +1,8 @@
 <?php  
-  include('../config/Authentication/Authorisation.php');
-  $authCheck = new Athorisation;
+  include('../config/Authentication/Authorization.php');
+  $authCheck = new Authorization;
   $authCheck->authCheck();
+  
 ?>
 
 

@@ -1,38 +1,28 @@
 <?php
 
 //calling helpers for password encryption
-include('../helpers/Genaral.php');
-
-include('../Database/Database.php');
+include('../helpers/General.php');
 
 include('../Database/Connection.php');
 
 class Login{
 
-    public $email;
-    public $password;
-    public $dbConnection;
-
-    public function __construct(){
-
-        $this->email = $_REQUEST['email'];
-
-        $this->password =Genaral::passwordEncrypt($_REQUEST['password']);
-
-        $this->dbConnection = Connection::dbConnection();
-
-       
-    }
 
     public function userLogin(){
-
-        //start the session
+        
+         //start the session
          session_start();
 
-         $query_user = "SELECT * FROM `users` WHERE email='$this->email'
-         AND passwords='" . $this->password . "'";
-         
-         $data = mysqli_query($this->dbConnection, $query_user);
+         $email = $_REQUEST['email'];
+
+         $password =General::passwordEncrypt($_REQUEST['password']);
+
+         $dbConnection = Connection::dbConnection();
+
+         $query_user = "SELECT * FROM `users` WHERE email='$email'
+         AND passwords='" . $password . "'";
+
+         $data = mysqli_query($dbConnection , $query_user);
 
          $users = mysqli_num_rows($data);
 
@@ -53,8 +43,6 @@ class Login{
 
 
 }
-
-
 
 $athentication = new Login;
 $athentication->userLogin();

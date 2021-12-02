@@ -1,10 +1,17 @@
-
 <?php
     
-    include('../config/helpers/Genaral.php');
-    Genaral::checkSession();
+    include('../config/helpers/General.php');
+    General::checkSession();
 
+    include('../config/Authentication/Authorization.php');
+    $user_data = new Authorization;
+    $user_data->getUser(); 
+
+    include('../config/Database/Database.php');
+    $database = new Database;
+    $database->Select();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,9 +37,10 @@
 <h1 style = "font-size:16px; text-align:center; color:blue;">
      
       <?php  
-        include('../config/Authentication/Authorisation.php');
-        $user_data = new Athorisation;
-        $user_data->getUser('users_name');
+         while($row = $result->fetch_assoc()) 
+          {
+            echo "Welcome ".$row["users_name"]."...!";
+          }
       ?>
 
 </h1>
@@ -61,10 +69,14 @@
 <h1>Tasks List :-</h1>
 
 <div>
-        
-  <?php  
-      include('../config/Database/Database.php');
-  ?>
+  
+<?php
+   while($row = $result->fetch_assoc()) 
+   {
+
+   echo $row["task_name"].'<br> <br>';
+   }
+?>
     
 </div>
 

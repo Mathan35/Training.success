@@ -1,5 +1,5 @@
 <?php
-    include('../helpers/Genaral.php');
+    include('../helpers/General.php');
 
     include('../Database/Connection.php');
 
@@ -8,20 +8,14 @@ class Registration{
     public $password;
     public $dbConnection;
 
-
-    public function __construct(){
-
-        // $this->db_connection =  mysqli_connect($this->servername, $this->username, $this->passwords,$this->database);
-        $this->dbConnection = Connection::dbConnection();
-       
-    }
-
     public function Register(){
 
         //start the session
         session_start();
 
-        $passwordEncrypt = Genaral::passwordEncrypt($_POST['passwords']);
+        $this->dbConnection = Connection::dbConnection();
+
+        $passwordEncrypt = General::passwordEncrypt($_POST['passwords']);
 
         $fields = array_keys($_POST);
 

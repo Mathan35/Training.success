@@ -2,19 +2,17 @@
 
 class Connection{
 
-    private $serverName = "localhost";
-    private $userName = "root";
-    private $passwords = "";
-    private $database = "to_do_app";
+    static $serverName = "localhost";
+    static $userName = "root";
+    static $passwords = "";
+    static $database = "to_do_app";
 
-    private $dbConnection;
-
+    // static $dbConnection;
     public static function dbConnection(){
 
-        $this->dbConnection =  mysqli_connect($this->serverName, $this->userName, $this->passwords,$this->database);
+        $dbConnection =  mysqli_connect(self::$serverName, self::$userName, self::$passwords,self::$database);
 
-        return $this->dbConnection;
-
+        return  $dbConnection;
     }
 
 }
