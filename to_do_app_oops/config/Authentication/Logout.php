@@ -1,6 +1,5 @@
 <?php
 
-//static
 class Logout{
  
     static function userLogout(){

@@ -11,8 +11,8 @@ class Connection{
     public static function dbConnection(){
 
         $dbConnection =  mysqli_connect(self::$serverName, self::$userName, self::$passwords,self::$database);
-
         return  $dbConnection;
+        
     }
 
 }
