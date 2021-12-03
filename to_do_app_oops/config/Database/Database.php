@@ -44,6 +44,48 @@ class Database{
         }
           
     }
+    public function createDatabase(){
+       
+        // Create database
+        $sql = "CREATE DATABASE IF NOT EXISTS to_do_app";
+        if ($conn->query($sql) === TRUE) {
+        echo "Database created successfully";
+        } else {
+        echo "Error creating database: " . $conn->error;
+        }
+    }
+
+    public function usersTable(){
+        
+        // sql to create users table
+        $sql = "CREATE TABLE IF NOT EXISTS users (
+        id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        users_name VARCHAR(30) NOT NULL,
+        email VARCHAR(30) NOT NULL,
+        passwords VARCHAR(50) NOT NULL,
+        reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+        )";
+        
+        if ($conn->query($sql) === TRUE) {
+        echo "Table users created successfully";
+        } else {
+        echo "Error creating table: " . $conn->error;
+        }
+    }
+
+    public function taskTable(){
+        // sql to create users table
+        $sql = "CREATE TABLE IF NOT EXISTS to (
+        id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        task_name VARCHAR(30) NOT NULL,
+        )";
+        
+        if ($conn->query($sql) === TRUE) {
+          echo "Table users created successfully";
+        } else {
+          echo "Error creating table: " . $conn->error;
+        }
+    }
 
 
 }
