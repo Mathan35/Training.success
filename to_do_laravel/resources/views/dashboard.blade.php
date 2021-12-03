@@ -12,11 +12,6 @@
                   <p>Welcome {{$user_name->name}}.....!</p>
                <h1 class = "mt-5 ml-5">Task Application</h1>
 
-               <form action="createTask" method="post">
-               @csrf
-               <label for="task_name"></label>
-               <input type="text" name="task_name" id="">
-
                @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -26,7 +21,11 @@
                         </ul>
                     </div>
                @endif
-                            <br>
+               <form action="createTask" method="post">
+               @csrf
+               <label for="task_name"></label>
+               <input type="text" name="task_name" id="">
+               <br>
                <span class = "border">
                <button class = "p-2" type="submit">Submit</button>
                </span>
@@ -50,7 +49,7 @@
                     <tr>
                     <th scope="row">{{$task['id']}}</th>
                     <td>{{$task['task_name']}}</td>
-                    <td class = "border"><a class = "p-2"  href="deleteTask/{{$task['id']}}">Delete</a></td>
+                    <td class = "border ml-2"><a class = "p-2"  href="deleteTask/{{$task['id']}}">Delete</a></td>
                 
                     </tr>
                     @endforeach
