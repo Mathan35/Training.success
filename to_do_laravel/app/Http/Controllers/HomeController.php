@@ -24,7 +24,7 @@ class HomeController extends Controller
 
         $request->validate([
             'task_name' => 'required',
-        ], $messages);
+        ]);
 
         $taskName = new Task;
 

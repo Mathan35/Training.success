@@ -50,7 +50,8 @@
                     <tr>
                     <th scope="row">{{$task['id']}}</th>
                     <td>{{$task['task_name']}}</td>
-                    <td><a href="deleteTask/{{$task['id']}}">Delete</a></td>
+                    <td class = "border"><a class = "p-2"  href="deleteTask/{{$task['id']}}">Delete</a></td>
+                
                     </tr>
                     @endforeach
                 
