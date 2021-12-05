@@ -1,0 +1,64 @@
+.form{
+    margin-left: 30px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.form label {
+    font-size: 20px;
+    font-weight: 700;
+}
+input[type="text"] {
+    height: 33px;
+    border-radius: 3px;
+}
+textarea{
+    border-radius: 3px !important;
+}
+button.button {
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 4px 10px 4px 10px;
+}
+button.button:hover {
+    background-color: #3483eb;
+    border: 1px solid #3483eb;
+    transition:ease .3s;
+    color:white;
+}
+.home a{
+    margin-left: 29px;
+    font-size: 17px;
+    color: #0b3893;
+}
+.card img {
+    width: 250px;
+    border-radius: 5px;
+    height: 187px;
+}
+.card a {
+    font-size: 19px;
+    font-weight: 600;
+    color: #3483eb;
+}
+.news_card {
+    display: inline;
+}
+.card {
+    width: 250px;
+    display: inline-block;
+    margin: 34px;
+}
+.news_body img {
+    height: 224px;
+    width: 323px;
+    border-radius: 8px;
+}
+.news_body {
+    margin: 40px;
+}
+p.date {
+    color: #484847;
+    font-size: 15px;
+    margin-top: 0px;
+}
+

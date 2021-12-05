@@ -21,13 +21,13 @@ class HomeController extends Controller
 
     public function createTask(Request $request)
     {
-        $messages = [
+        $errors = [
             'taske_name.required' => 'The task name field is required.....',
         ];
 
         $request->validate([
             'task_name' => 'required',
-        ], $messages);
+        ], $errors);
 
         $taskName = new Task;
 

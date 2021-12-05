@@ -21,6 +21,7 @@
                         </ul>
                     </div>
                @endif
+               
                <form action="createTask" method="post">
                @csrf
                <label for="task_name"></label>
