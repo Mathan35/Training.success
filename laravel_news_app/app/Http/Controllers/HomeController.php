@@ -27,9 +27,10 @@ class HomeController extends Controller
         ],$errors);
 
         $post = new Post;
+
         $image = $request->file('image')->getClientOriginalName();
-        //image stored in public path
         $request->file('image')->storeAs('public/assets/images/',$image);
+        
         $post->image = $image;
         $post->title = $request->title;
         $post->description = $request->description;

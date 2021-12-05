@@ -8,11 +8,13 @@
     font-weight: 700;
 }
 input[type="text"] {
+    width: 60%;
     height: 33px;
     border-radius: 3px;
 }
 textarea{
     border-radius: 3px !important;
+    width: 60%;
 }
 button.button {
     border: 1px solid black;
