@@ -12,7 +12,7 @@
           @include('layouts.side-menu')
            </div>
            <div class="dashboard-content col-md-8 m-4 ">
-              <h4>Number og Technologies <span>{{$technology}}</span> </h4>
+              <h4>Number of Technologies <span>{{$technology}}</span> </h4>
               <h4>Number of Quizes <span>{{$quiz}}</span></h4>
               <h4>Total Number of Questions <span>{{$questions}}</span></h4>
           </div>

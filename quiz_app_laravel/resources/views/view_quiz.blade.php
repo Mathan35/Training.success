@@ -47,7 +47,7 @@
                                             
                                 <form action="{{route('validate_answer')}}" method="post">
                                   @csrf
-                                   @foreach($getQuestion as $data)
+                                   @forelse($getQuestion as $data)
                                    <div class = "quiz-card home-list mx-3 mt-3">
                                        <h2 class = "text-left">{{$data['question']}}</h2>
                                        <input type="hidden" value="{{$data['id']}}" name = "answer[{{$data['id']}}][res]">
@@ -78,7 +78,9 @@
                                         </div>
 
                                     </div>
-                                    @endforeach
+                                    @empty
+                                    <p>No questions Found</p>
+                                    @endforelse
                                     <button class = "submit-btn mt-3" type="submit">Submit</button>
 
                                 </form>
