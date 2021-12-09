@@ -112,6 +112,7 @@ class QuizController extends Controller
         ];
 
         $request->validate([
+            'question'        => 'required',
             'option_1'        => 'required',
             'option_2'        => 'required',
             'option_3'        => 'required',
@@ -176,6 +177,7 @@ class QuizController extends Controller
         foreach ($request->answer as $value) {
             $data += Question::where('id', $value['res'])->where('correct_answer',$value['opt'])->count();
         }
+        print_r($data); die;
         return view('result',['result'=> $data]);
     }
 

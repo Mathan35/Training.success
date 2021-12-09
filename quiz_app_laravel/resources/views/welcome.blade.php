@@ -51,6 +51,8 @@
                                <img src="{{asset('assets/images/'.$data['image'])}}" alt="">
                                <h2 class = "text-left "><a href="viewQuiz/{{$data['id']}}">{{$data['name']}}</a> </h2>
                                <p>{{$data->description}}</p>
+                               <p class = "date">{{ $data->created_at->format('d,'.' F'.' y') }}</p>
+
                            </div>
                            @endforeach
                        </div>

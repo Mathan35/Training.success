@@ -20,14 +20,5 @@ class Quiz extends Model
         'description',
     ];
 
-    public function getTechnologyDetails(){
-        return $this->hasOne('App\Models\QuizesTechnology','technology_id', 'id');
-    }
-
-
-    public function getQuizDetails(){
-        return $this->hasOne('App\Models\QuizesTechnology','quiz_id', 'id');
-    }
-
 
 }
