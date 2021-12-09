@@ -47,7 +47,6 @@ class CreateNewUser implements CreatesNewUsers
             'registration_date' => Carbon::today()->toDateString(),
             'registration_time' => Carbon::now()->toTimeString(),
             'ip_address'        => $this->getIp(),
-            'status'            => 1,
             'password'          => Hash::make($input['password']),
             
         ]);
