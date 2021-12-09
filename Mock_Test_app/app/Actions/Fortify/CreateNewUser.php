@@ -11,12 +11,12 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\UserPersonalSkill;
 use App\Models\UserTechSkill;
-use App\helpers\validateUserId;
+use App\helpers\General;
 
 class CreateNewUser implements CreatesNewUsers
 {
     use PasswordValidationRules;
-    use validateUserId;
+    use General;
 
      public function create(array $input)
      {

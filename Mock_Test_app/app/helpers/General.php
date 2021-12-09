@@ -5,7 +5,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 
 
-trait validateUserId{
+trait General{
 
     public function Random(){
 
