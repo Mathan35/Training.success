@@ -24,27 +24,27 @@
             </div>
             <div class="mt-4">
                 <x-jet-label for="instagram_url" value="{{ __('Instagram URL') }}" />
-                <x-jet-input id="instagram_url" class="block mt-1 w-full" type="text" name="instagram_url" :value="old('instagram_url')" required />
+                <x-jet-input id="instagram_url" class="block mt-1 w-full" type="text" name="instagram_url" :value="old('instagram_url')"  />
             </div>
             <div class="mt-4">
                 <x-jet-label for="facebook_url" value="{{ __('Facbook URL') }}" />
-                <x-jet-input id="facebook_url" class="block mt-1 w-full" type="text" name="facebook_url" :value="old('facebook_url')" required />
+                <x-jet-input id="facebook_url" class="block mt-1 w-full" type="text" name="facebook_url" :value="old('facebook_url')"  />
             </div>
             <div class="mt-4">
                 <x-jet-label for="linkedin_url" value="{{ __('Linked In URL') }}" />
-                <x-jet-input id="linkedin_url" class="block mt-1 w-full" type="text" name="linkedin_url" :value="old('linkedin_url')" required />
+                <x-jet-input id="linkedin_url" class="block mt-1 w-full" type="text" name="linkedin_url" :value="old('linkedin_url')"  />
             </div>
             <div class="mt-4">
                 <x-jet-label for="recovery_email" value="{{ __('Recovery Email') }}" />
-                <x-jet-input id="recovery_email" class="block mt-1 w-full" type="email" name="recovery_email" :value="old('recovery_email')" required />
+                <x-jet-input id="recovery_email" class="block mt-1 w-full" type="email" name="recovery_email" :value="old('recovery_email')"  />
             </div>
             <div class="mt-4">
                 <x-jet-label for="personal_skills" value="{{ __('Personal Skills') }}" />
-                <x-jet-input id="personal_skills" class="block mt-1 w-full" type="text" name="personal_skills" :value="old('personal_skills')" required />
+                <x-jet-input id="personal_skills" class="block mt-1 w-full" type="text" name="personal_skills" :value="old('personal_skills')"  />
             </div>
             <div class="mt-4">
                 <x-jet-label for="technical_skills" value="{{ __('Technical Skills') }}" />
-                <x-jet-input id="technical_skills" class="block mt-1 w-full" type="text" name="technical_skills" :value="old('technical_skills')" required />
+                <x-jet-input id="technical_skills" class="block mt-1 w-full" type="text" name="technical_skills" :value="old('technical_skills')" reqired />
             </div>
 
             <div class="mt-4">

@@ -36,7 +36,9 @@ class UserController extends Controller
 
     public function checkAssignments(){
         $get_assignment = AssignmentStudent::where('user_id',auth()->user()->id)->orderBy('id', 'DESC')->get();
-        return view('user.check-assignments', compact('get_assignment'));
+        $get_assignment_status = AssignmentSubmit::where('user_id',auth()->user()->id)->orderBy('id', 'DESC')->get();
+
+        return view('user.check-assignments', compact('get_assignment','get_assignment_status'));
     }
     public function submitAssignments(){
         $get_assignment = AssignmentStudent::where('user_id',auth()->user()->id)->get();
@@ -52,13 +54,11 @@ class UserController extends Controller
             $errors = [
                 'assignment_id.required' => 'The assignment type field is required..',
                 'github_url.required'    => 'The github url field is required..',
-                'output_url.required'    => 'The output url field is required..',
             ];
 
             $request->validate([
                 'assignment_id'   => 'required', 
                 'github_url'      => 'required', 
-                'output_url'      => 'required', 
             ],$errors);
 
             $assignment_submit                 = new AssignmentSubmit;

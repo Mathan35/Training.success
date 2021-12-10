@@ -166,3 +166,11 @@
 .back-home {
     font-weight: 800;
 }
+li.current-url a {
+    color: black;
+}
+
+li.current-url {
+    background-color: white;
+    border: 1px solid blueviolet;
+}
