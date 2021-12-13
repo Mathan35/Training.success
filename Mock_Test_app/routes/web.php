@@ -111,4 +111,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     
 
 });
-    
+
+Route::get('/test', [UserController::class, 'test'])->name('test');
+

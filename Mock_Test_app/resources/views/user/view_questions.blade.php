@@ -13,7 +13,6 @@
            <div class = "card mt-4">
                <div class = "submit-body">
                <div class = "quiz-list">
-                  <h1> {{$get_test_name->title}}</h1> 
                     <form action="{{route('validate_answer')}}" method="post">
                         @csrf
                         @forelse($get_Questions as $data)

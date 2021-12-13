@@ -18,6 +18,7 @@ class MockExam extends Model
     protected $fillable = [
         'mock_bank_id',
         'title',
+        'exam_id',
         'image',
     ];
 

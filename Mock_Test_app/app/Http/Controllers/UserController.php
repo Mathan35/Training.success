@@ -76,9 +76,8 @@ class UserController extends Controller
 
     public function viewQuestions($title){
         $get_bank_id = MockExam::where("title",$title)->get()->pluck('mock_bank_id');
-        $get_Questions = MockBankQuestion::where('mock_bank_id',$get_bank_id)->get();
-        dd($get_Questions);
-        return view('user.view_questions', compact('get_Questions', 'get_test_name'));
+        $get_Questions = MockBankQuestion::whereIn('mock_bank_id',$get_bank_id)->get();
+        return view('user.view_questions', compact('get_Questions'));
     }
 
     public function validateAnswers(Request $request){
@@ -135,4 +134,102 @@ class UserController extends Controller
     }
   
 
+    public function test(){
+        $array = [
+              [
+                'user_id' => 'US42354',
+                'name'    => 'raj',
+                'email'   => 'mathan@gmail.com',
+              ],
+              [
+                'user_id' => 'US423454',
+                'name'    => 'david',
+                'email'   => 'raj@gmail.com',
+              ],
+              [
+                'user_id' => 'US42354',
+                'name'    => 'malan',
+                'email'   => 'malan@gmail.com',
+              ],
+              [
+                'user_id' => 'US426354',
+                'name'    => 'vedhan',
+                'email'   => 'vedhan@gmail.com',
+              ],
+              [
+                'user_id' => 'US4762354',
+                'name'    => 'karim',
+                'email'   => 'karim@gmail.com',
+              ],
+              [
+                'user_id' => 'US4267354',
+                'name'    => 'manoj',
+                'email'   => 'manoj@gmail.com',
+              ],
+              [
+                'user_id' => 'US4762354',
+                'name'    => 'fahid',
+                'email'   => 'fahid@gmail.com',
+              ],
+              [
+                'user_id' => 'US4265354',
+                'name'    => 'kamal',
+                'email'   => 'kamal@gmail.com',
+              ],
+
+              [
+                'user_id' => 'US617956984',
+                'name'    => 'Mathankumar',
+                'email'   => 'kumar@gmail.com',
+              ],     
+              [
+                'user_id' => 'US737597024',
+                'name'    => 'Evelyn Fry',
+                'email'   => 'womew@mailinator.com',
+                
+              ],     [
+                'user_id' => 'US1719870608',
+                'name'    => 'Noble Harvey',
+                'email'   => 'lexu@mailinator.com',
+              ],     [
+                'user_id' => 'US1996807520',
+                'name'    => 'Darryl Thompson',
+                'email'   => 'topopu@mailinator.com',
+              ],     [
+                'user_id' => 'US343063603',
+                'name'    => 'Lester Frost',
+                'email'   => 'senibas@mailinator.com',
+              ],     [
+                'user_id' => 'US82949125',
+                'name'    => 'Willa Smith',
+                'email'   => 'tocefojup@mailinator.com',
+              ],    
+              [
+                'user_id' => 'US1853892630',
+                'name'    => 'Ebony Moran',
+                'email'   => 'dimodogyp@mailinator.com',
+              ],
+        ];
+        $users = User::get()->toArray();
+
+        $collection1     = collect($users);
+        $usersEmail      = $collection1->pluck('email')->toArray();
+    
+        $collection2     = collect($array);
+        $arrayEmail      = $collection2->pluck('email')->toArray();
+
+        $newEmailData    = array_diff($arrayEmail,$usersEmail);
+        $existEmailData  = array_intersect($arrayEmail,$usersEmail);
+
+        $allNewData      = $collection2->whereIn('email', $newEmailData)->toArray();
+        $allExistData    = $collection2->whereIn('email', $existEmailData)->toArray();
+
+        $newData         = implode(",",$newEmailData);
+        $existData       = implode(",",$existEmailData);
+
+        return view('user.test',compact('existData','newData','allExistData','allNewData'));
+    }
+    
+
 }
+  

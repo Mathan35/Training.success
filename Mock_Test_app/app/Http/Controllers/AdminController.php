@@ -277,6 +277,7 @@ class AdminController extends Controller
         foreach ($request->mock_bank_id as $key => $value) {
    
         $mock_exam                = new MockExam;
+        $mock_exam->exam_id       = $this->examId;
         $mock_exam->mock_bank_id  = $value;   
         $mock_exam->title         = $title;
         $mock_exam->image         = $image;
@@ -313,6 +314,7 @@ class AdminController extends Controller
         $image                    = $request->file('image')->getClientOriginalName();
         $request->file('image')->move(public_path('assets/images/'),$image);
         $mock_exam->title         = $request->title;
+        $mock_exam->exam_id         = $this->examId;
         $mock_exam->image         = $image;
         $mock_exam->mock_bank_id  = $request->mock_bank_id;   
         $mock_exam->save();

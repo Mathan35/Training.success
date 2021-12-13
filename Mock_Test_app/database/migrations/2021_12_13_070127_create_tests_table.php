@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMockExamsTable extends Migration
+class CreateTestsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateMockExamsTable extends Migration
      */
     public function up()
     {
-        Schema::create('mock_exams', function (Blueprint $table) {
+        Schema::create('tests', function (Blueprint $table) {
             $table->id();
-            $table->string('mock_bank_id');
-            $table->string('title');
-            $table->string('exam_id');
-            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +26,6 @@ class CreateMockExamsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mock_exams');
+        Schema::dropIfExists('tests');
     }
 }

@@ -32,5 +32,16 @@ trait General{
             return false;
         }
     }
+    public function examId(){
+        $exam_id   = "EX".rand();
+        $check_id = MockExam::where('exam_id',$create_id)->first();
+
+        if($check_id != null){
+            $this->examId();
+        }
+        else{
+            return $exam_id;
+        }
+    }
 
 }
