@@ -23,10 +23,12 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/check_assignments', [UserController::class, 'checkAssignments'])->name('check_assignments');
     Route::get('/submit_assignments', [UserController::class, 'submitAssignments'])->name('submit_assignments');
     Route::post('/create_submission', [UserController::class, 'createSubmission'])->name('create_submission');
-    Route::get('/view_questions/{id}', [UserController::class, 'viewQuestions'])->name('view_questions');
+    Route::get('/view_questions/{title}', [UserController::class, 'viewQuestions'])->name('view_questions');
     Route::post('/validate_answer', [UserController::class, 'validateAnswers'])->name('validate_answer');
     Route::get('/test-result', [UserController::class, 'testResult'])->name('test_result');
-
+    Route::get('/profile-details', [UserController::class, 'profileDetails'])->name('profile_details');
+    Route::post('/create_profile', [UserController::class, 'createProfile'])->name('create_profile');
+    
     
     Route::middleware('checkrole')->prefix('admin')->group(function(){
 

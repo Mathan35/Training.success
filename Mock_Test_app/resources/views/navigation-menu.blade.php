@@ -95,9 +95,12 @@
                             <div class="block px-4 py-2 text-xs text-gray-400">
                                 {{ __('Manage Account') }}
                             </div>
+                            <x-jet-dropdown-link href="{{ route('profile_details') }}">
+                                {{ __('Profile') }}
+                            </x-jet-dropdown-link>
 
                             <x-jet-dropdown-link href="{{ route('profile.show') }}">
-                                {{ __('Profile') }}
+                                {{ __('Settings') }}
                             </x-jet-dropdown-link>
 
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
@@ -142,7 +145,7 @@
                 {{ __('Dashboard') }}
             </x-jet-responsive-nav-link>
         </div>
-
+          
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="flex items-center px-4">

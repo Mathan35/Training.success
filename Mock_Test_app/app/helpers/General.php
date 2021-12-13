@@ -3,8 +3,7 @@
 namespace App\helpers;
 use App\Models\User;
 use Illuminate\Http\Request;
-
-
+use DB;
 trait General{
 
     public function Random(){
@@ -22,6 +21,16 @@ trait General{
 
     public function getIp(){
         return request()->ip();  
+    }
+    //validating id in ne table
+    public function validateId($id,$fId,$tableName){
+        $validate = DB::table($tableName)->where($fId,$id)->first();
+        if($validate){
+           return true;
+        }
+        else{
+            return false;
+        }
     }
 
 }

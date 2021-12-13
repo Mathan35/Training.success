@@ -174,3 +174,61 @@ li.current-url {
     background-color: white;
     border: 1px solid blueviolet;
 }
+.chosen-container {
+    width: 100% !important;
+}
+.chosen-container-multi .chosen-choices {
+    height: 39px !important;
+    border: 0.5px solid #d1cbcb;
+    border-radius: 4px;
+}
+.chosen-container-multi .chosen-choices li.search-field {
+    display: none;
+}
+.chosen-container-multi .chosen-choices li.search-choice .search-choice-close {
+    position: absolute;
+    top: 11px !important;
+    right: 3px;
+    display: block;
+    width: 12px;
+    height: 12px;
+    background: url(chosen-sprite.png) -42px 1px no-repeat;
+    font-size: 1px;
+}
+.chosen-container-multi .chosen-choices li.search-choice {
+    position: relative;
+    margin: 3px 5px 3px 0;
+    padding: 9px 22px 5px 5px !important;
+    border: 1px solid #aaa;
+    max-width: 100%;
+    border-radius: 3px;
+    background-color: #eeeeee;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(20%, #f4f4f4), color-stop(50%, #f0f0f0), color-stop(52%, #e8e8e8), to(#eee));
+    background-image: linear-gradient(#f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%);
+    background-size: 100% 19px;
+    background-repeat: repeat-x;
+    background-clip: padding-box;
+    -webkit-box-shadow: 0 0 2px #fff inset, 0 1px 0 rgb(0 0 0 / 5%);
+    box-shadow: 0 0 2px #fff inset, 0 1px 0 rgb(0 0 0 / 5%);
+    color: #333;
+    line-height: 13px;
+    cursor: default;
+}
+.chosen-container-multi .chosen-choices li.search-choice span {
+    font-size: 16px !important;
+    word-wrap: break-word;
+}
+
+.profile-detail h1 {
+    margin: 30px;
+    font-size: 28px;
+    font-weight: 600;
+}
+.profile-body {
+    margin: 32px;
+}
+.profile-body input {
+    width: 100%;
+    border-radius: 7px;
+    border: 1px solid #bfb1b1;
+}

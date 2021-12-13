@@ -7,11 +7,13 @@
                     @csrf
 
                     <label for="name">Mock Bank Type</label>
-                    <select name = "mock_bank_id" class=" mt-3 form-select" aria-label="Default select example">
+                    <div id="output"></div>
+                    <select data-placeholder="Choose tags ..."  name="mock_bank_id[]" multiple class="chosen-select">
                         @foreach($mock_bank as $data)
                         <option value = "{{$data['id']}}" >{{$data['title']}}</option>
                         @endforeach
                     </select>
+    
                     <div class="form-group mt-2">
                         <label for="title">Title</label>
                         <input type="text" name = "title" class="form-control" id="" >
@@ -43,7 +45,7 @@
                             <th scope="row">{{$data['id']}}</th>
                             <td>{{$data['title']}}</td>
                             <td><img src="{{asset('assets/images/'.$data['image'])}}" alt=""></td>
-                            <td>{{$data->getMockBank->title}}</td>
+                            <td>{{$data->getMockBank->title}}</td>   
                             <td>
                                 <a class = "text-decoration-none" href="{{route('edit_mock_exam',$data['id'])}}">Edit</a> 
                                 <a class = "text-decoration-none text-danger" href="{{route('delete_mock_exam',$data['id'])}}">Delete</a> 
@@ -59,4 +61,6 @@
             </div>
         </div>
     </div>
+    
+<x-dropdown-link/>
 @endsection

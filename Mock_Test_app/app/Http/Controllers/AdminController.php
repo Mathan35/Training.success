@@ -14,9 +14,11 @@ use App\Models\AssignmentImage;
 use App\Models\User;
 use App\Models\AssignmentStudent;
 use App\Models\AssignmentSubmit;
+use App\helpers\General;
 
 class AdminController extends Controller
 {
+    use General;
     
     public function dashboard(){
         $user = User::where('role','user')->count();
@@ -50,8 +52,13 @@ class AdminController extends Controller
 
     }
     public function deleteTechnology($id){
-        Technology::find($id)->delete();
-        return redirect()->back()->with('success','Technology deleted successfully');
+        if($this->validateId($id,"technology_id","mock_banks") == true){
+            return redirect()->back()->with('success','This Technology used in other table');
+        }
+        else{
+            Technology::find($id)->delete();
+            return redirect()->back()->with('success','Technology deleted successfully');
+        }
     }
     public function editTechnology($id){
         $edit_technology = Technology::find($id);
@@ -116,8 +123,16 @@ class AdminController extends Controller
         return redirect()->back()->with('success','Mock Bank successfully saved');
     }
     public function deleteMockBank($id){
-        MockBank::find($id)->delete();
-        return redirect()->back()->with('success','Mock Bank deleted successfully');
+        if($this->validateId($id,"mock_bank_id","mock_exams") == true 
+        || $this->validateId($id,"mock_bank_id","mock_bank_questions") == true 
+        || $this->validateId($id,"bank_id","tag_banks") == true ){
+
+            return redirect()->back()->with('success','This Mock Bank used in other category');
+        }
+        else{
+            MockBank::find($id)->delete();
+            return redirect()->back()->with('success','Mock Bank deleted successfully');
+        }
     }
     public function editMockBank($id){
         $mock_bank = MockBank::with('getTechnology')->find($id);
@@ -241,6 +256,7 @@ class AdminController extends Controller
         return view('admin.mock_exam.mock_exam',compact('mock_bank','mock_exam'));
     }
     public function createMockExam(Request $request){
+    //   dd(implode(",",$request->multi_select));
         $errors = [
             'title.required'         => 'The title field is required..',
             'image.required'         => 'The image field is required..',
@@ -253,18 +269,24 @@ class AdminController extends Controller
             'mock_bank_id'  => 'required',
            
         ],$errors);
-
-        $mock_exam                = new MockExam;
-        $image                    = $request->file('image')->getClientOriginalName();
+        
+        $image        = $request->file('image')->getClientOriginalName();
         $request->file('image')->move(public_path('assets/images/'),$image);
-        $mock_exam->title         = $request->title;
+        $title        = $request->title;
+
+        foreach ($request->mock_bank_id as $key => $value) {
+   
+        $mock_exam                = new MockExam;
+        $mock_exam->mock_bank_id  = $value;   
+        $mock_exam->title         = $title;
         $mock_exam->image         = $image;
-        $mock_exam->mock_bank_id  = $request->mock_bank_id;   
         $mock_exam->save();
+        }
+
         return redirect()->back()->with('success','Mock Bank Question successfully saved');
     }
     public function deleteMockExam($id){
-        MockBankExam::find($id)->delete();
+        MockExam::find($id)->delete();
         return redirect()->back()->with('success','Mock Exam deleted successfully');
     }
     public function editMockExam($id){
@@ -317,10 +339,16 @@ class AdminController extends Controller
         return redirect()->back()->with('success','Tags successfully saved');
     }
     public function deleteTags($id){
-        Tag::find($id)->delete();
-        return redirect()->back()->with('success','Tags deleted successfully');
+        if($this->validateId($id,"tag_id","tag_banks") == true ){
+            return redirect()->back()->with('success','This Tag used in other category');
+        }
+        else{
+            Tag::find($id)->delete();
+            return redirect()->back()->with('success','Tags deleted successfully');
+        }
     }
     public function editTags($id){
+        
         $tags = Tag::find($id);
         return view('admin.tags.edit_tags',compact('tags'));
     }
@@ -422,8 +450,14 @@ class AdminController extends Controller
         return redirect()->back()->with('success','Assignments successfully saved');
     }
     public function deleteAssignments($id){
-        Assignment::find($id)->delete();
-        return redirect()->back()->with('success','Tag Bank deleted successfully');
+        if($this->validateId($id,"assignment_id","assignment_images") == true 
+        || $this->validateId($id,"assignment_id","assignment_students") == true){
+            return redirect()->back()->with('success','This Assignment used in other category');
+        }
+        else{
+            Assignment::find($id)->delete();
+            return redirect()->back()->with('success','Assignment deleted successfully');
+        }
     }
     public function editAssignments($id){
         $assignment = Assignment::find($id);

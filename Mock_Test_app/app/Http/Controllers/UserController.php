@@ -12,16 +12,15 @@ use App\Models\AssignmentSubmit;
 use App\Models\MockBankQuestion;
 use App\Models\MockExamScore;
 use App\Models\UserPersonalSkill;
-use App\Models\UserTechnicalSkill;
+use App\Models\UserTechSkill;
 use Carbon\Carbon;
-
-
+use DB;
 
 class UserController extends Controller
 {
 
     public function Home(){
-        $mock_exams = MockExam::with('getMockBank')->get();
+        $mock_exams =  DB::table('mock_exams')->get()->unique('title');
         return view('welcome', compact('mock_exams'));
     }
     
@@ -74,11 +73,14 @@ class UserController extends Controller
         }
 
     }
-    public function viewQuestions($id){
-        $get_test_name = MockExam::find($id);
-        $get_Questions = MockBankQuestion::where('mock_bank_id',$id)->get();
+
+    public function viewQuestions($title){
+        $get_bank_id = MockExam::where("title",$title)->get()->pluck('mock_bank_id');
+        $get_Questions = MockBankQuestion::where('mock_bank_id',$get_bank_id)->get();
+        dd($get_Questions);
         return view('user.view_questions', compact('get_Questions', 'get_test_name'));
     }
+
     public function validateAnswers(Request $request){
         $data = 0;
         foreach ($request->answer as $value) {
@@ -96,6 +98,40 @@ class UserController extends Controller
     public function testResult(){
         $test_result = MockExamScore::where('user_id',auth()->user()->id)->orderBy('id', 'DESC')->get();
         return view('user.check_test_scores', compact('test_result'));
+    }
+
+    public function profileDetails(){
+        $getPesonalSkill       = UserPersonalSkill::where("user_id",auth()->user()->id)->get();
+        $getTechSkill       = UserTechSkill::where("user_id",auth()->user()->id)->get();
+        $getUserDetails = User::find(auth()->user()->id);
+        return view('user.profile-details',compact('getUserDetails','getPesonalSkill','getTechSkill'));
+    }
+    public function createProfile(Request $request){
+          
+        $profile                = User::find(auth()->user()->id);
+        $profile->instagram_url = $request->instagram_url;
+        $profile->facebook_url  = $request->facebook_url;
+        $profile->linkedin_url  = $request->linkedin_url;
+        $profile->recovery_email  = $request->recovery_email;
+        $profile->save();
+
+        UserTechSkill::UpdateorCreate(
+            ["user_id"=>auth()->user()->id],
+            [
+                'user_id'    => auth()->user()->id,
+                'skill_name' => $request->personal_skills,
+
+            ]);
+
+        UserPersonalSkill::UpdateorCreate(
+            ["user_id"=>auth()->user()->id],
+            [
+                'user_id'    => auth()->user()->id,
+                'skill_name' => $request->personal_skills,
+
+            ]);
+            
+        return redirect()->back()->with('success','Profile Succesfully Updated..');
     }
   
 

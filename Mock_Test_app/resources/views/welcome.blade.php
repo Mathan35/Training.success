@@ -46,10 +46,9 @@
                 <div class = "card-content">
                     @foreach($mock_exams as $data)
                     <div class = "card-body card">
-                        <img src="{{asset('assets/images/'.$data['image'])}}" alt="">
-                        <h1>{{$data['title']}}</h1>
-                        <p>{{$data->getMockBank->title}}</p>
-                        <h2><a href="{{route('view_questions',$data['id'])}}">Take Test</a></h2>
+                        <img src="{{asset('assets/images/'.$data->image)}}" alt="">
+                        <h1>{{$data->title}}</h1>
+                        <h2><a href="{{route('view_questions',$data->title)}}">Take Test</a></h2>
                     </div>
                     @endforeach
                 </div>
