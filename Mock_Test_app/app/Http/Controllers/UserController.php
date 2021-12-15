@@ -74,10 +74,11 @@ class UserController extends Controller
 
     }
 
-    public function viewQuestions($title){
-        $get_bank_id = MockExam::where("title",$title)->get()->pluck('mock_bank_id');
+    public function viewQuestions($exam_id){
+        $get_bank_id = MockExam::where("exam_id",$exam_id)->get()->pluck('mock_bank_id');
+        $get_exam = MockExam::where("exam_id",$exam_id)->get()->unique('title');
         $get_Questions = MockBankQuestion::whereIn('mock_bank_id',$get_bank_id)->get();
-        return view('user.view_questions', compact('get_Questions'));
+        return view('user.view_questions', compact('get_Questions','get_exam'));
     }
 
     public function validateAnswers(Request $request){

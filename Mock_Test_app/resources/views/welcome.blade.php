@@ -48,7 +48,7 @@
                     <div class = "card-body card">
                         <img src="{{asset('assets/images/'.$data->image)}}" alt="">
                         <h1>{{$data->title}}</h1>
-                        <h2><a href="{{route('view_questions',$data->title)}}">Take Test</a></h2>
+                        <h2><a href="{{route('view_questions',$data->exam_id)}}">Take Test</a></h2>
                     </div>
                     @endforeach
                 </div>

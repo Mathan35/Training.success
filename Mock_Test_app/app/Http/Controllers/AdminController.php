@@ -273,11 +273,11 @@ class AdminController extends Controller
         $image        = $request->file('image')->getClientOriginalName();
         $request->file('image')->move(public_path('assets/images/'),$image);
         $title        = $request->title;
-
+        $exam_id = $this->examId();
         foreach ($request->mock_bank_id as $key => $value) {
    
         $mock_exam                = new MockExam;
-        $mock_exam->exam_id       = $this->examId;
+        $mock_exam->exam_id       = $exam_id;
         $mock_exam->mock_bank_id  = $value;   
         $mock_exam->title         = $title;
         $mock_exam->image         = $image;
@@ -291,12 +291,13 @@ class AdminController extends Controller
         return redirect()->back()->with('success','Mock Exam deleted successfully');
     }
     public function editMockExam($id){
-
-        $mock_bank = MockBank::orderBy('id', 'DESC')->get();
         $mock_exam = MockExam::with('getMockBank')->find($id);
+        $mock_bank_id = MockExam::where("exam_id",$mock_exam->exam_id)->get()->pluck('mock_bank_id');
+        $mock_bank = MockBank::whereNotIn("id",$mock_bank_id)->orderBy('id', 'DESC')->get();
         return view('admin.mock_exam.edit_mock_exam',compact('mock_bank','mock_exam'));
     }
     public function updateMockExam(Request $request, $id){
+        
         $errors = [
             'title.required'         => 'The title field is required..',
             'image.required'         => 'The image field is required..',
@@ -314,7 +315,7 @@ class AdminController extends Controller
         $image                    = $request->file('image')->getClientOriginalName();
         $request->file('image')->move(public_path('assets/images/'),$image);
         $mock_exam->title         = $request->title;
-        $mock_exam->exam_id         = $this->examId;
+        $mock_exam->exam_id         = $this->examId();
         $mock_exam->image         = $image;
         $mock_exam->mock_bank_id  = $request->mock_bank_id;   
         $mock_exam->save();

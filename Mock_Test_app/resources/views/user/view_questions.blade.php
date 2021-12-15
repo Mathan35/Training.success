@@ -13,13 +13,14 @@
            <div class = "card mt-4">
                <div class = "submit-body">
                <div class = "quiz-list">
+                   <h1>{{$get_exam[0]['title']}}</h1>
                     <form action="{{route('validate_answer')}}" method="post">
                         @csrf
                         @forelse($get_Questions as $data)
                         <div class = "quiz-card home-list mx-3 mt-3">
                             <h2 class = "text-left">{{$data['question']}}</h2>
                             <input type="hidden" value="{{$data['id']}}" name = "answer[{{$data['id']}}][res]">
-                            <input type="hidden" value="{{$data['mock_bank_id']}}" name = "mock_exam_id">
+                            <input type="hidden" value="{{$get_exam[0]['id']}}" name = "mock_exam_id">
 
                             <div class="form-check">
                                 <input class="form-check-input"  type="radio" value = "{{$data['option_1']}}" name="answer[{{$data['id']}}][opt]" id="flexRadioDefault{{$data['option_1']}}">

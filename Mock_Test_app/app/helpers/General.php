@@ -2,6 +2,7 @@
 
 namespace App\helpers;
 use App\Models\User;
+use App\Models\MockExam;
 use Illuminate\Http\Request;
 use DB;
 trait General{
@@ -34,7 +35,7 @@ trait General{
     }
     public function examId(){
         $exam_id   = "EX".rand();
-        $check_id = MockExam::where('exam_id',$create_id)->first();
+        $check_id = MockExam::where('exam_id',$exam_id)->first();
 
         if($check_id != null){
             $this->examId();

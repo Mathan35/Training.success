@@ -29,7 +29,7 @@
                             @forelse($getTechSkill as $value)
                             <input id="technical_skills" value = "{{$value['skill_name']}}"   class="" type="text" name="technical_skills" />
                             @empty
-                            <input id="technical_skills"   class="block mt-1 w-full" type="text" name="technical_skills" />
+                            <input id="technical_skills"   class="" type="text" name="technical_skills" />
                             @endforelse
                         </div>
                         <div class="mt-4">
@@ -38,7 +38,8 @@
                         </div>
                         <div class="mt-4">
                             <label for="facebook_url" value="{{ __('Facbook URL') }}" >Facbook URL</lebel>
-                            <input id="facebook_url" value = "{{$getUserDetails->facebook_url}}" class="" type="text" name="facebook_url"  />
+                            <input id="facebook_url"  value = "{{$getUserDetails->facebook_url}}"    class="" type="text" name="facebook_url" />
+
                         </div>
                         <div class="mt-4">
                             <label for="linkedin_url" value="{{ __('Linked In URL') }}" >Linked In URL</lebel>

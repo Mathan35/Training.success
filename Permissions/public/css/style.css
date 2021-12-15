@@ -1,0 +1,15 @@
+.link{
+    margin-left:20px;
+    background-color: blueviolet;
+    color: white !important;
+    border-radius: 7px;
+    font-size: 16px;
+    padding: 7px 13px 7px 13px;
+}
+.header-link a {
+    font-size: 17px;
+    background-color: #3434a7;
+    border-radius: 5px;
+    color: white !important;
+    padding: 7px 10px 7px 10px;
+}
