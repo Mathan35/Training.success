@@ -42,11 +42,6 @@ class HomeController extends Controller
          return view('dashboard');
     }
 
-    public function viewRolesPermissions(){
-        $roleCheck = $this->findUser();        
-        $role      = Role::with('permissions')->get();	
-        return view('permission.view-roles-permission',compact('role','roleCheck'));
-    }
     public function Users(){
         $roleCheck = $this->findUser();        
         $getRoles  = Role::get();
@@ -72,8 +67,8 @@ class HomeController extends Controller
         $user->email    = $request->email;
         $user->password = Hash::make($request->password);
         $user->save();
-
-        $user  = User::find(User::latest('id')->first()->id);
+       
+        //role attach
         $role  = $request->role_id;
         $user->roles()->attach($role);
         return redirect()->back()->with('message','User successfully created with Roles');
@@ -93,7 +88,7 @@ class HomeController extends Controller
     }
 
     public function Roles(){
-        $roleCheck = $this->findUser(); 
+        $roleCheck     = $this->findUser(); 
         $getPermission = Permission::get();
         return view('permission.roles', compact('roleCheck', 'getPermission'));
     }
@@ -103,14 +98,15 @@ class HomeController extends Controller
             'name.required' => 'The Role Name field is required..',
         ];
         $request->validate([
-            'name'         => 'required',
+            'name'          => 'required',
         ],$errors);
 
         $role           = new Role;
         $role->name     = $request->name;
         $role->save();
-        $roleCheck = $this->findUser(); 
-        $rolet       = Role::find(Role::latest('id')->first());	
+
+        //attach permissions
+        $roleCheck  = $this->findUser(); 
         $permission = $request->permission_id;
         $role->permissions()->attach($permission);
         return redirect()->back()->with('message','Roles successfully created and Permission Assigned');   
@@ -118,10 +114,10 @@ class HomeController extends Controller
 
     }
     public function editRoles($id){
-        $role = Role::find($id);
-        $getPermissions  = Permission::get();
+        $role               = Role::find($id);
+        $getPermissions     = Permission::get();
         $checkedPermissions = collect($role->permissions)->pluck('id')->toArray();
-        $roleCheck = $this->findUser();        
+        $roleCheck          = $this->findUser();        
         return view('permission.edit-roles', compact('role','roleCheck','getPermissions','checkedPermissions'));
     }
     public function updateRoles(Request $request, $id){
@@ -129,39 +125,31 @@ class HomeController extends Controller
             'name.required' => 'The Role Name field is required..',
         ];
         $request->validate([
-            'name'         => 'required',
+            'name'          => 'required',
         ],$errors);
 
         $role           = Role::find($id);
         $role->name     = $request->name;
         $role->save();
-        $roleCheck = $this->findUser(); 
-        $rolet       = Role::find($id);	
-        $permission = $request->permission_id;
+        $roleCheck      = $this->findUser(); 
+        $rolet          = Role::find($id);	
+        $permission     = $request->permission_id;
         $role->permissions()->sync($permission);
         return redirect()->back()->with('message','Roles successfully updated with Permission');  
     }
 
     public function viewRoles(){
-        $role = Role::get();
+        $role      = Role::get();
         $roleCheck = $this->findUser();        
         return view('permission.view-roles',compact('role','roleCheck'));
     }
     
-
-    public function userRoles(){
+    public function viewRolesPermissions(){
         $roleCheck = $this->findUser();        
-        $user      = User::get();
-        $role      = Role::get();  
-        return view('permission.user-roles', compact('user','role', 'roleCheck'));
+        $role      = Role::with('permissions')->get();	
+        return view('permission.view-roles-permission',compact('role','roleCheck'));
     }
 
-    public function createUserRoles(Request $request){
-        $user  = User::find($request->user);	
-        $role  = $request->role_id;
-        $user->roles()->attach($role);
-        return redirect()->back()->with('message','User successfully created with Roles');
-    }
     public function viewRolesUsers(){
         $roleCheck = $this->findUser();        
         $user      = User::with('roles')->get();	
