@@ -8,7 +8,8 @@ use App\Models\Role;
 use App\Models\Permission;
 use App\Models\User;
 use Auth;
-use App\helpers\General;
+use App\Helpers\General;
+use Illuminate\Support\Facades\Gate;
 
 class HomeController extends Controller
 {
@@ -18,26 +19,15 @@ class HomeController extends Controller
         if(Auth::check()){
             $roleCheck = $this->findUser();        
             $user  = User::find(auth()->user()->id);
-            $check  = collect($user->roles)->toArray();
-            if(!empty($check)){
-                $permissions = [];
-                foreach ($user->roles as $key => $data)  {
-                    foreach ($data->permissions as $key => $value) {
-                        $permissions[] = $value;
-                    }
-                }  
-                $collection  = collect($permissions)->pluck('name')->toArray();
-             }
-            else{
-                    $collection = null;
-                }
-                    return view('welcome', compact('roleCheck','user', 'collection'));
+            return view('welcome', compact('roleCheck','user'));
         }
         else{
-            $collection = null;
-            return view('welcome',compact('collection'));
+            return view('welcome');
+
         }
+        
     }
+
     public function Dashboard(){
          return view('dashboard');
     }
@@ -132,7 +122,7 @@ class HomeController extends Controller
         $role->name     = $request->name;
         $role->save();
         $roleCheck      = $this->findUser(); 
-        $rolet          = Role::find($id);	
+
         $permission     = $request->permission_id;
         $role->permissions()->sync($permission);
         return redirect()->back()->with('message','Roles successfully updated with Permission');  
@@ -154,5 +144,24 @@ class HomeController extends Controller
         $roleCheck = $this->findUser();        
         $user      = User::with('roles')->get();	
         return view('permission.view-users',compact('user', 'roleCheck'));
+    }
+
+
+    public function testGate1()
+    {
+        if (Gate::allows('check-name')) {
+
+            return redirect()->back()->with('message','Your allowed to enter this feature');  
+    
+        } else {
+    
+            return redirect()->back()->with('message','Your Not allowed to enter this feature');  
+    
+        }
+    }
+    public function testGate2()
+    {
+        return redirect()->back()->with('message','Your Mathankumar');  
+
     }
 }

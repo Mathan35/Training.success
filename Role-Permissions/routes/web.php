@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,3 +38,11 @@ Route::post('update-roles/{id}',[HomeController::class, 'updateRoles'])->name('u
 //assign roles to user
 Route::get('view-roles-users',[HomeController::class, 'viewRolesUsers'])->name('view-users-roles');
 
+//athentication
+Route::get('login-form', [LoginController::class, 'LoginForm'])->name('login-form');
+Route::post('login', [LoginController::class, 'Login'])->name('login');
+Route::post('logout-user', [LoginController::class, 'LogoutUser'])->name('logout-user');
+
+
+Route::get('test-gate-1', [HomeController::class, 'testGate1'])->name('test-gate-1');
+Route::get('test-gate-2', [HomeController::class, 'testGate2'])->middleware(['auth','can:check-middlware'])->name('test-gate-2');

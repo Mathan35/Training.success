@@ -14,7 +14,7 @@ use App\Models\AssignmentImage;
 use App\Models\User;
 use App\Models\AssignmentStudent;
 use App\Models\AssignmentSubmit;
-use App\helpers\General;
+use App\Helpers\General;
 
 class AdminController extends Controller
 {

@@ -2,29 +2,39 @@
 @section('content')
             @auth
                 <div class="col-md-9 ml-3">
+                    @include('layouts.messages')
                     <div>
-                    @if(!empty($collection) && (in_array("create post", $collection)))
-                    <a class = "link text-decoration-none" href = "">create post</a>
-                    @endif
-                    @if(!empty($collection) && (in_array("delete post", $collection)))
-                    <a class = "link text-decoration-none" href = "">delete post</a>
-                    @endif
+                    @can('create-post')
+                        <a class = "link text-decoration-none" href = "">create post</a>
+                    @endcan
+                    @can('edit-post')
+                        <a class = "link text-decoration-none" href = "">edit post</a>
+                    @endcan
+                    @can('delete-post')
+                        <a class = "link text-decoration-none" href = "">delete post</a>
+                    @endcan
+                    @can('update-post')
+                        <a class = "link text-decoration-none" href = "">update post</a>
+                    @endcan
+                    @can('destroy-post')
+                        <a class = "link text-decoration-none" href = "">destroy post</a>
+                    @endcan
 
-                    @if(!empty($collection) && (in_array("edit post", $collection)))
-                    <a class = "link text-decoration-none" href = "">edit post</a>
-                    @endif
 
-                    @if(!empty($collection) && (in_array("update post", $collection)))
-                    <a class = "link text-decoration-none" href = "">update post</a>
-                    @endif
 
-                    @if(!empty($collection) &&  (in_array("destroy post", $collection)))
-                    <a class = "link text-decoration-none" href = "">destroy post</a>
-                    @endif
 
+
+                    <div class = "mt-5">
+                        <a href="{{route('test-gate-1')}}">test-gate-1</a>
+                    </div>
+                    <div>
+                    <a href="{{route('test-gate-2')}}">test-gate-2</a>
+                    </div>
                     </div>
                 </div>
             @endauth
+
+       
         </div>
     </div>
 </div>
