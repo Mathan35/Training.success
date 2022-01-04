@@ -17,6 +17,7 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Organization Name</th>
+                                <th scope="col">Status</th>
                                 <th scope="col">View</th>
                             </tr>
                         </thead>
@@ -25,6 +26,7 @@
                                 <tr>
                                     <td scope="row">{{$item->id}}</td>
                                     <td>{{$item->name}}</td>
+                                    <td>{{$item->status == 1? 'Active' : 'In-Active' }}</td>
                                     <td><a class="text-primary"  href="{{route('view-organization', $item->id)}}">View</a></td>
                                 </tr>
                             @endforeach

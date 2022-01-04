@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Helpers;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -11,62 +10,39 @@ use App\Models\Workspace;
 use App\Models\Role;
 use App\Models\Task;
 use App\Models\User;
+use App\Helpers\Query\GetOrganization;
+use App\Helpers\Query\GetWorkspace;
+use App\Helpers\Query\GetRole;
+use App\Helpers\Query\GetProject;
+use App\Helpers\Query\GetTask;
+use App\Helpers\Query\GetUser;
 
 trait General{
 
-    public function Task($id){
-        $task  = QueryBuilder::for(Project::class)
-                 ->allowedIncludes(['tasks'])->where('organization_id', $id)
-                 ->withCount('tasks')->get();
-        return $task;
-    }
-    public function getOrganization($id){
-        $organization = QueryBuilder::for(Organization::class)
-                        ->allowedIncludes(['workspaces','roles', 'users'])
-                        ->withCount('workspaces','roles', 'users')->find($id);
-                        
-        return $organization;
+    public function FindOrganization($id){
+        return GetOrganization::Start($id);
     }
 
-    public function getWorkspace($id){
-        $workspace   = QueryBuilder::for(Workspace::class)
-                     ->allowedIncludes(['projects'])
-                     ->with('projects')
-                     ->find($id);
-        return $workspace;
+    public function FindWorkspace($id){
+        return GetWorkspace::Start($id);
     }
 
-    public function getRole($id){
-         $role = QueryBuilder::for(Role::class)
-                 ->allowedIncludes(['permissions'])
-                 ->with('permissions')
-                 ->find($id);
-         return $role;
+    public function FindRole($id){
+        return GetRole::Start($id);
     }
 
-    public function getProject($id){
-        $project = QueryBuilder::for(Project::class)
-                   ->allowedIncludes(['tasks','organization','workspace'])
-                   ->with('organization','workspace','tasks')
-                   ->find($id);
-        return $project;
+    public function FindProject($id){
+        return GetProject::Start($id);
    }
 
-   public function findTask($id){
-        $getTask = QueryBuilder::for(Task::class)
-                   ->allowedIncludes(['project'])
-                   ->with('project')
-                   ->find($id); 
-        return $getTask;
+   public function FindTask($id){
+        return GetTask::Start($id);
 
    }
    
-   public function getUser($id){
-        $user = QueryBuilder::for(User::class)
-                ->allowedIncludes(['organization'])
-                ->with('organization')
-                ->find($id);
-        return $user;
+   public function FindUser($id){
+        return GetUser::Start($id);
+        
    }
 
 }

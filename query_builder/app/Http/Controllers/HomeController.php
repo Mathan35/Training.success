@@ -16,7 +16,6 @@ class HomeController extends Controller
 {
     use General;
 
-
     public function Dashboard()
     {
         return view('dashboard');
@@ -30,9 +29,8 @@ class HomeController extends Controller
     }
     public function ViewOrganization($id)
     {
-        $task         = $this->Task($id);
-        $organization = $this->getOrganization($id);
-        return view('organization.view-organization', compact('organization', 'task'));
+        $organization = $this->FindOrganization($id);
+        return view('organization.view-organization', compact('organization'));
     }
 
     //workspaces
@@ -44,7 +42,7 @@ class HomeController extends Controller
         return view('workspace.workspace',compact('workspace'));
     }
     public function ViewWorkspace($id){
-        $workspace = $this->getWorkspace($id);
+        $workspace = $this->FindWorkspace($id);
         return view('workspace.view-workspace', compact('workspace'));
     }
 
@@ -54,7 +52,7 @@ class HomeController extends Controller
         return view('role.role', compact('Role'));
     }
     public function ViewRole($id){
-        $Role = $this->getRole($id);
+        $Role = $this->FindRole($id);
         return view('role.view-role', compact('Role'));
     }
 
@@ -64,7 +62,7 @@ class HomeController extends Controller
         return view('project.project', compact('Project'));
     }
     public function ViewProject($id){
-        $Project = $this->getProject($id);
+        $Project = $this->FindProject($id);
         return view('project.view-project', compact('Project'));
     }
 
@@ -74,7 +72,7 @@ class HomeController extends Controller
         return view('task.task', compact('Task'));
     }
     public function ViewTask($id){
-        $Task = $this->findTask($id);
+        $Task = $this->FindTask($id);
         return view('task.view-task', compact('Task'));
     }
 
@@ -84,7 +82,7 @@ class HomeController extends Controller
         return view('user.user', compact('User'));
     }
     public function ViewUser($id){
-        $User = $this->getUser($id);
+        $User = $this->FindUser($id);
         return view('user.view-user', compact('User'));
     }
 }

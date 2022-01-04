@@ -9,7 +9,8 @@
    <div class="container shadow mt-5  rounded">
        <div class="row  m-5">
            <div class="col-md-12 mt-5 mb-5">
-               <h1 class="h3 text-primary">Project Name : <span class="text-dark"> {{$Project['name']}}</span></h1>
+                <h1 class="h6 border p-2 text-primary" >Status : <span class="text-success"> {{$Project['status'] == 1? 'Completed':'Processing'}}</span></h1>
+                <h1 class="h3 text-primary">Project Name : <span class="text-dark"> {{$Project['name']}}</span></h1>
                 <div class="">
 
                     <p class="h4 mt-2 text-primary">Tasks list :-</p>

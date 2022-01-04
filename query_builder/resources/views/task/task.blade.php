@@ -17,6 +17,7 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Task Name</th>
+                                <th scope="col">Status</th>
                                 <th scope="col">View</th>
                             </tr>
                         </thead>
@@ -25,6 +26,7 @@
                                 <tr>
                                     <td scope="row">{{$item->id}}</td>
                                     <td>{{$item->name}}</td>
+                                    <td>{{$item->status == 1? 'Completed' : 'Processing' }}</td>
                                     <td><a class="text-primary"  href="{{route('view-task', $item->id)}}">View</a></td>
                                 </tr>
                             @endforeach
