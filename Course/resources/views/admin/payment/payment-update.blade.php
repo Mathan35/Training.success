@@ -27,6 +27,7 @@
 
                   <!-- Messages -->
                   <x-Message-component/>
+                  <x-Fail-component/>
                   
                   <h5 class="card-title">Update payment Details</h5>
 
@@ -35,12 +36,12 @@
                     @csrf
                     <input type="hidden" value="{{$Enquiry->id}}" name="enquiry_id">
                     @if ($Enquiry->batch_id == null)           
-                    <label for="payment" class="mt-2">Batch</label>
-                    <select class="form-select" name="batch_id" aria-label="Default select example">
-                      @foreach ($Batch as $item)
-                      <option value="{{$item->id}}">{{$item->name}} ({{$item->timing}})</option>
-                      @endforeach
-                    </select>
+                      <label for="payment" class="mt-2">Batch</label>
+                      <select class="form-select" name="batch_id" aria-label="Default select example">
+                        @foreach ($Batch as $item)
+                          <option value="{{$item->id}}">{{$item->name}} ({{$item->timing}})</option>
+                        @endforeach
+                      </select>
                     @endif
 
 
@@ -53,10 +54,18 @@
 
                     <label for="mode" class="mt-2">Payment Mode</label>
                     <select class="form-select" name="payment_mode" aria-label="Default select example">
-                      <option value="Advance">Advance</option>
-                      <option value="EMI 1">EMI 1</option>
-                      <option value="EMI 2">EMI 2</option>
-                      <option value="Full Payment">Full Payment</option>
+                      @if(!in_array("Advance",$PaymentModes))
+                        <option value="Advance">Advance</option>
+                      @endif
+                      @if(!in_array("EMI 1",$PaymentModes))
+                        <option value="EMI 1">EMI 1</option>
+                      @endif
+                      @if(!in_array("EMI 2",$PaymentModes))
+                        <option value="EMI 2">EMI 2</option>
+                      @endif
+                      @if(!in_array("Full Payment",$PaymentModes))
+                        <option value="Full Payment">Full Payment</option>
+                      @endif
                     </select>
 
                     <div class="form-group mt-2">

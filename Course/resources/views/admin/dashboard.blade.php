@@ -148,7 +148,6 @@
                         <th scope="col">Course</th>
                         <th scope="col">Price</th>
                         <th scope="col">Sold</th>
-                        {{-- <th scope="col">Users</th> --}}
                       </tr>
                     </thead>
                     <tbody>
@@ -158,8 +157,6 @@
                         <td><a href="#" class="text-primary fw-bold">{{$item->name}}</a></td>
                         <td>${{$item->price}}</td>
                         <td class="fw-bold">{{$item->Enquiry->count()}}</td>
-                        {{-- <td class="fw-bold">{{$item->Enquiry->Payment->count()}}</td> --}}
-
                       </tr>
                       @endforeach
                       

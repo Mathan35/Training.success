@@ -44,9 +44,12 @@ class AdminController extends Controller
         return view('admin.payment.payment-check', compact('GetEnquiry'));
     }
     public function PaymentUpdate($id){
-        $Batch   = QueryBuilder::for(Batch::class)->get();
-        $Enquiry = QueryBuilder::for(Enquiry::class)->find($id);
-        return view('admin.payment.payment-update', compact('Enquiry', 'Batch'));
+        $Batch            = QueryBuilder::for(Batch::class)->get();
+        $Enquiry          = QueryBuilder::for(Enquiry::class)->find($id);
+        $CollectEnquiries = collect($Enquiry->Payment);
+        $CollectPayments  = collect($CollectEnquiries)->pluck("enquiry_id")->unique();
+        $PaymentModes          = QueryBuilder::for(Payment::class)->whereIn("enquiry_id",$CollectPayments)->get()->pluck('payment_mode')->toArray();
+        return view('admin.payment.payment-update', compact('Enquiry', 'Batch','PaymentModes'));
     }
 
     public function StorePayment(PaymentRequest $request){
@@ -55,7 +58,7 @@ class AdminController extends Controller
         $PaymentSum = $Enquiry->Payment->sum('amount');
 
          if($Enquiry->Course->price < ($PaymentSum + $request->amount)){
-            return redirect()->back()->with('success', 'Entered Amount is higher than Course Price');
+            return redirect()->back()->with('fail', 'Entered Amount is higher than Course Price');
          }
          else{
             if($request->batch_id != null){
