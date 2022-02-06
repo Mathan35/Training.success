@@ -15,10 +15,10 @@ class CreateEnquiriesTable extends Migration
     {
         Schema::create('enquiries', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id');
+            $table->bigInteger('user_id');
             $table->string('enquiry_id');
-            $table->string('course_id');
-            $table->string('batch_id')->nullable();
+            $table->bigInteger('course_id');
+            $table->bigInteger('batch_id')->nullable();
             $table->string('status');
             $table->string('date');
             $table->string('time');

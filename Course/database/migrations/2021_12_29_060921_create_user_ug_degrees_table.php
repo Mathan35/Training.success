@@ -15,12 +15,12 @@ class CreateUserUgDegreesTable extends Migration
     {
         Schema::create('user_ug_degrees', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id');
+            $table->bigInteger('user_id');
             $table->string('passed_out')->nullable();
             $table->string('studying_year')->nullable();
-            $table->string('degree_id');
-            $table->string('specializtion_id');
-            $table->string('college_id');
+            $table->bigInteger('degree_id');
+            $table->bigInteger('specializtion_id');
+            $table->bigInteger('college_id');
             $table->timestamps();
         });
     }

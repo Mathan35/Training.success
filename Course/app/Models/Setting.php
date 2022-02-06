@@ -17,7 +17,10 @@ class Setting extends Model
     protected $fillable = [
         'name',
         'logo',
-        'Background_image',
+        'background_image',
+        'background_centered_image',
+        'login_background_image',
+        'background_header',
         'background_title',
         'background_description',
     ];

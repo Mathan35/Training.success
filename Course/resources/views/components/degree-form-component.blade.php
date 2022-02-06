@@ -45,4 +45,4 @@
         <input type="text" name="location" class="form-control" id="" aria-describedby="" placeholder="">
     </div>
 
-    <button type="submit" class="btn btn-primary mt-4 mb-4">Update</button></div>
+    <button type="submit" class="btn btn-outline-primary mt-4 mb-4 shadow-sm">Update</button></div>

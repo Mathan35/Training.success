@@ -75,6 +75,11 @@ class User extends Authenticatable
             return $this->hasOne(UserUgDegree::class);
         }
 
+        public function Role()
+        {
+            return $this->hasOne(Role::class, "id", "role");
+        }
+
         //for enquiry to course
         public function UserPgDegree()
         {

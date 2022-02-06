@@ -15,8 +15,8 @@ class CreateCourseTechnologiesTable extends Migration
     {
         Schema::create('course_technologies', function (Blueprint $table) {
             $table->id();
-            $table->string('course_id');
-            $table->string('technology_id');
+            $table->bigInteger('course_id');
+            $table->bigInteger('technology_id');
             $table->timestamps();
         });
     }

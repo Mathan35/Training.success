@@ -33,6 +33,9 @@ class AdminController extends Controller
         $PaymentCount = QueryBuilder::for(Payment::class)->get()->sum('amount');
         return view('admin.dashboard',compact('EnquiryCount', 'UserCount', 'PaymentCount', 'Enquiry', 'Course','CourseCount'));
     }
+    public function AdminProfile(){
+        return view('admin.admin-profile');
+    }
     public function EnquiryList($status){
        return $this->GetEnquiryList($status);
     }
@@ -89,7 +92,7 @@ class AdminController extends Controller
         return view('admin.payment.view-payment', compact('Payment','Enquiry','PaymentSum'));
     }
     public function UsersList(){
-        $User = QueryBuilder::for(User::class)->withCount('Enquiry')->with('UserUgDegree','UserPgDegree')->get();
+        $User = QueryBuilder::for(User::class)->get();
         return view('admin.users.users-list', compact('User'));
     }
     public function ViewUser($id){
@@ -153,9 +156,20 @@ class AdminController extends Controller
             $background_image  = $request->file('background_image')->getClientOriginalName();
             $request->file('background_image')->move(public_path('assets/images/'),$background_image);
             $Settings->background_image = $background_image;
+        }      
+         if($request->file('background_centered_image') != null){
+            $background_centered_image  = $request->file('background_centered_image')->getClientOriginalName();
+            $request->file('background_centered_image')->move(public_path('assets/images/'),$background_centered_image);
+            $Settings->background_centered_image = $background_centered_image;
+        }
+         if($request->file('login_background_image') != null){
+            $login_background_image  = $request->file('login_background_image')->getClientOriginalName();
+            $request->file('login_background_image')->move(public_path('assets/images/'),$login_background_image);
+            $Settings->login_background_image = $login_background_image;
         }
         $Settings->name = $request->name;
         $Settings->background_title = $request->background_title;
+        $Settings->background_header = $request->background_header;
         $Settings->background_description = $request->background_description;
         $Settings->save();
 

@@ -1755,3 +1755,6 @@ ol {
 		margin-right: 10px;
 	}
 }
+#course_list {
+    max-width: 350px;
+}

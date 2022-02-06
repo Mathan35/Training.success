@@ -43,20 +43,24 @@
                             <th>{{$item->id}}</th>
                             <td class="h6">{{$item->name}}</td>
                             <td class="d-flex">
+                              @can('EditTechnology','App\Models\Technology')
                                 <div class="p-1">
                                     <a class=" btn btn-outline-success btn-sm" href="{{route('technology.edit',$item->id)}}"> <i class="bi bi-pencil-fill"></i></a>
                                 </div>
+                                @endcan
 
+                                @can('DeleteTechnology','App\Models\Technology')
                                 <div class="p-1">
-                                <form id="delete-form" class="" method="POST" action="{{route('technology.destroy', $item->id)}}">
-                                    {{ csrf_field() }}
-                                    {{ method_field('DELETE') }}
+                                  <form id="delete-form" class="" method="POST" action="{{route('technology.destroy', $item->id)}}">
+                                      {{ csrf_field() }}
+                                      {{ method_field('DELETE') }}
 
-                                    <div class="form-group">
-                                        <button class="btn btn-outline-danger btn-sm " type="submit"><i class="bi bi-trash-fill"></i></button>
-                                    </div>
-                                </form>
-                            </div>
+                                      <div class="form-group">
+                                          <button class="btn btn-outline-danger btn-sm " type="submit"><i class="bi bi-trash-fill"></i></button>
+                                      </div>
+                                  </form>
+                                </div>
+                                @endcan
 
                             </td>
                         </tr>

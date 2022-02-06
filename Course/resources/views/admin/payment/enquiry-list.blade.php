@@ -56,24 +56,26 @@
                                     <td>{{$item->Course->name}}</td>
                                     <td>{{$item->date}} , {{$item->time}}</td>
                                     <td>
-                                     @if($item->status == "3")
-                                      <button type="button" class="btn bg-success text-light rounded" data-bs-toggle="tooltip" data-bs-placement="top" title="Completed">C</button>
-                                     @else
-                                        @if ($item->status != "2")
-                                          <a href="{{route('enquiry-status',['id'=>$item->id,'status'=>"1"])}}">
-                                              <button type="button" class="btn {{$item->status == "1" ? "bg-info text-light":"btn-outline-info"}} rounded" data-bs-toggle="tooltip" data-bs-placement="top" title="Follow Up">F</button>
-                                          </a>
+                                      @can('ChangeEnquiryStatus','App\Models\Enquiry')
+                                      @if($item->status == "3")
+                                        <button type="button" class="btn bg-success text-light rounded" data-bs-toggle="tooltip" data-bs-placement="top" title="Completed">C</button>
+                                      @else
+                                          @if ($item->status != "2")
+                                            <a href="{{route('enquiry-status',['id'=>$item->id,'status'=>"1"])}}">
+                                                <button type="button" class="btn {{$item->status == "1" ? "bg-info text-light":"btn-outline-info"}} rounded" data-bs-toggle="tooltip" data-bs-placement="top" title="Follow Up">F</button>
+                                            </a>
 
-                                          <a href="{{route('enquiry-status',['id'=>$item->id,'status'=>"4"])}}">
-                                              <button type="button" class="btn {{$item->status == "4" ? "bg-danger text-light":"btn-outline-danger"}} rounded" data-bs-toggle="tooltip" data-bs-placement="top" title="Reject">R</button>
+                                            <a href="{{route('enquiry-status',['id'=>$item->id,'status'=>"4"])}}">
+                                                <button type="button" class="btn {{$item->status == "4" ? "bg-danger text-light":"btn-outline-danger"}} rounded" data-bs-toggle="tooltip" data-bs-placement="top" title="Reject">R</button>
+                                            </a>
+                                          @endif
+                                          <button type="button" class="btn {{$item->status == "2" ? "bg-warning text-light":"btn-outline-warning"}} rounded" data-bs-toggle="tooltip" data-bs-placement="top" title="Reject">P</button>
+
+                                          <a href="{{route('enquiry-status',['id'=>$item->id,'status'=>"3"])}}">
+                                            <button type="button" class="btn {{$item->status == "3" ? "bg-success text-light":"btn-outline-success"}} rounded" data-bs-toggle="tooltip" data-bs-placement="top" title="Completed">C</button>
                                           </a>
                                         @endif
-                                        <button type="button" class="btn {{$item->status == "2" ? "bg-warning text-light":"btn-outline-warning"}} rounded" data-bs-toggle="tooltip" data-bs-placement="top" title="Reject">P</button>
-
-                                        <a href="{{route('enquiry-status',['id'=>$item->id,'status'=>"3"])}}">
-                                          <button type="button" class="btn {{$item->status == "3" ? "bg-success text-light":"btn-outline-success"}} rounded" data-bs-toggle="tooltip" data-bs-placement="top" title="Completed">C</button>
-                                        </a>
-                                      @endif
+                                      @endcan
 
                                     </td>
                                   </tr>

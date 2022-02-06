@@ -15,7 +15,7 @@ class CreateCourseTitlesTable extends Migration
     {
         Schema::create('course_titles', function (Blueprint $table) {
             $table->id();
-            $table->string('course_id');
+            $table->bigInteger('course_id');
             $table->string('title');
             $table->timestamps();
         });

@@ -27,6 +27,7 @@ class EducationRequest extends FormRequest
             'specializtion'       => 'required',
             'college'           => 'required',
             'degree'           => 'required',
+            'location'           => 'required',
         ];
     }
 
@@ -36,6 +37,7 @@ class EducationRequest extends FormRequest
             'specializtion.required'  => 'The specializtion field is required..',
             'college.required'  => 'The College field is required..',
             'degree.required'  => 'The Degree field is required..',
+            'locaion.required'  => 'The Locaion field is required..',
         ];
     }
 }

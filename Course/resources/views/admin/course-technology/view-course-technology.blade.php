@@ -49,9 +49,11 @@
                               @endforeach
                             </td>
                             <td class="d-flex">
+                              @can('EditCourseTechnology','App\Models\CourseTechnology')
                                 <div class="p-1">
                                     <a class=" btn btn-outline-success btn-sm" href="{{route('course-technology.edit',$item->id)}}"> <i class="bi bi-pencil-fill"></i></a>
                                 </div>
+                                @endcan
                             </td>
                         </tr>
                       @endforeach

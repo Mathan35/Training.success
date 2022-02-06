@@ -18,12 +18,15 @@ class CreateSettingsTable extends Migration
             $table->string('name')->nullable();
             $table->string('logo')->nullable();
             $table->string('background_image')->nullable();
+            $table->string('background_centered_image')->nullable();
+            $table->string('login_background_image')->nullable();
             $table->string('background_title')->nullable();
+            $table->string('background_header')->nullable();
             $table->string('background_description')->nullable();
             $table->timestamps();
         });
     }
-
+    
     /**
      * Reverse the migrations.
      *

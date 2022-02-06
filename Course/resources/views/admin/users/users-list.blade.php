@@ -36,7 +36,6 @@
                         <th scope="col">#</th>
                         <th scope="col">User Name</th>
                         <th scope="col">Email</th>
-                        <th scope="col">Enquiries</th>
                         <th scope="col">Status</th>
                         <th scope="col">Last Login Time</th>
                         <th scope="col">Action</th>
@@ -49,8 +48,8 @@
                         <th scope="row">{{$item->id}}</th>
                         <td scope="row">{{$item->name}}</td>
                         <td>{{$item->email}}</td>
-                        <td>{{$item->enquiry_count}}</td>
                         <td>
+                          @can('ChangeUserStatus','App\Models\User')
 
                             <a href="{{route('user-status',['id'=>$item->id,'status'=>"1"])}}">
                                 <button type="button" class="btn {{$item->status == "1"? "bg-success text-light":"btn-outline-success "}}  h6 rounded" data-bs-toggle="tooltip" data-bs-placement="top" title="click to Acitve">Active</button>
@@ -58,12 +57,10 @@
                             <a href="{{route('user-status',['id'=>$item->id,'status'=>"0"])}}">
                             <button type="button" class="btn {{$item->status == "0"? "bg-danger text-light":"btn-outline-danger "}} h6 rounded" data-bs-toggle="tooltip" data-bs-placement="top" title="click In-Acitve">In-Active</button>
                             </a>
-                            {{-- @if ($item->status == "0")
-                            <p class="text-danger">In-Active</p>
-                            @else
-                            <p class="text-success">Active</p>
-
-                            @endif --}}
+                          @else
+                          <p class="text-danger">-</p>
+                          @endcan
+                           
                         </td>
                         <td>{{$item->last_login}}</td>
                         <td><a href="{{route('view-user',$item->id)}}">View</a></td>

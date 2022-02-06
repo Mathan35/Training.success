@@ -141,7 +141,7 @@
                 <div class="card-body pb-0">
                   <h5 class="card-title">Top Selling <span>| Today</span></h5>
 
-                  <table class="table table-borderless">
+                  <table class="table table-borderless datatable">
                     <thead>
                       <tr>
                         <th scope="col">Preview</th>
@@ -151,13 +151,15 @@
                       </tr>
                     </thead>
                     <tbody>
-                      @foreach ($Course as $item)                          
+                      @foreach ($Course as $item)  
+                      @if($item->Enquiry->count()>1)                        
                       <tr>
                         <th scope="row"><a href="#"><img src="{{asset('assets/images/'.$item->image)}}" alt=""></a></th>
                         <td><a href="#" class="text-primary fw-bold">{{$item->name}}</a></td>
                         <td>${{$item->price}}</td>
                         <td class="fw-bold">{{$item->Enquiry->count()}}</td>
                       </tr>
+                      @endif
                       @endforeach
                       
                     </tbody>
@@ -179,7 +181,7 @@
 
               <div class="activity">
    
-                @foreach ($Enquiry as $item)                  
+                @forelse ($Enquiry as $item)                  
                 <div class="activity-item d-flex">
                   <div class="activite-label ">{{$item->created_at->diffForHumans()}}</div>
                   <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
@@ -200,7 +202,9 @@
                     )
                   </div>
                 </div><!-- End activity item-->
-                @endforeach
+                @empty
+                <p>No enquiries found</p>
+                @endforelse
 
               </div>
 

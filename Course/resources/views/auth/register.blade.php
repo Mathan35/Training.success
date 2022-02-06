@@ -1,79 +1,81 @@
-<x-guest-layout>
-    <x-jet-authentication-card>
-        <x-slot name="logo">
-            <x-jet-authentication-card-logo />
-        </x-slot>
-
-        <x-jet-validation-errors class="mb-4" />
-
-        <form method="POST" action="{{ route('register') }}">
-            @csrf
-
-            <div>
-                <x-jet-label for="name" value="{{ __('Name') }}" />
-                <x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+@extends('layouts.auth')
+@section('content')
+      
+      <!-- Page Header section start here -->
+    <div class="pageheader-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="pageheader-content text-center">
+                        <h2>Register Page</h2>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb justify-content-center">
+                                <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Register</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
             </div>
+        </div>
+    </div>
+    <!-- Page Header section ending here -->
 
-            <div class="mt-4">
-                <x-jet-label for="email" value="{{ __('Email') }}" />
-                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
-            </div>
-
-            <div class="mt-4">
-                <x-jet-label for="phone" value="{{ __('Phone') }}" />
-                <x-jet-input id="phone" class="block mt-1 w-full" type="text" name="phone" :value="old('phone')" required />
-            </div>
-
-            <div class="mt-4">
-                <x-jet-label for="dob" value="{{ __('Date Of Birth') }}" />
-                <x-jet-input id="dob" class="block mt-1 w-full" type="date" name="dob" :value="old('dob')" required />
-            </div>
-            <div class="mt-4">
-                <x-jet-label for="password_confirmation" value="{{ __('Country') }}" />
-                <select class="" aria-label=" w-full" name="country_id">
-                    @foreach ($Country as $item)
-                    <option value="{{$item->id}}">{{$item->name}}</option>
-                    @endforeach
-                </select>
-            </div>
-
-            <div class="mt-4">
-                <x-jet-label for="password" value="{{ __('Password') }}" />
-                <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            </div>
-           
-
-            <div class="mt-4">
-                <x-jet-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                <x-jet-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
-            </div>
-
-            @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
-                <div class="mt-4">
-                    <x-jet-label for="terms">
-                        <div class="flex items-center">
-                            <x-jet-checkbox name="terms" id="terms"/>
-
-                            <div class="ml-2">
-                                {!! __('I agree to the :terms_of_service and :privacy_policy', [
-                                        'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'" class="underline text-sm text-gray-600 hover:text-gray-900">'.__('Terms of Service').'</a>',
-                                        'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'" class="underline text-sm text-gray-600 hover:text-gray-900">'.__('Privacy Policy').'</a>',
-                                ]) !!}
-                            </div>
-                        </div>
-                    </x-jet-label>
+    <!-- Login Section Section Starts Here -->
+    <div class="login-section padding-tb section-bg">
+        <div class="text-center mx-5">
+            <x-jet-validation-errors class="mb-4 text-danger bg-light border rounded" />
+            @if (session('status'))
+                <div class="mb-4 font-medium text-sm text-green-600">
+                    {{ session('status') }}
                 </div>
             @endif
+        </div>
+        <div class="container">
+            <div class="account-wrapper">
+                <h3 class="title">Register</h3>
 
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
+                <form method="POST" action="{{ route('register') }}" class="signin-form">
+                    @csrf                 
+                    <div class="form-group mt-4">
+                        <input type="name" placeholder="Name" :value="old('name')" required autofocus id="name"  name="name">
+                    </div>
+                    <div class="form-group mt-4">
+                        <input type="email" placeholder="email" :value="old('email')" required autofocus id="email"  name="email">
+                    </div>
+                    <div class="form-group mt-4">
+                        <input type="text" placeholder="phone" :value="old('phone')" required autofocus id="phone"  name="phone">
+                    </div>
+                    <div class="form-group mt-4">
+                        <input type="date" placeholder="dob" :value="old('dob')" required autofocus id="dob"  name="dob">
+                    </div>
 
-                <x-jet-button class="ml-4">
-                    {{ __('Register') }}
-                </x-jet-button>
+                    <div class="form-group mt-4">
+                        <select class="form-control text-dark" aria-label=" w-full" name="country_id">
+                            @foreach ($Country as $item)
+                            <option class="text-dark" value="{{$item->id}}">{{$item->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group mt-4">
+                        <input type="password" id="password" name="password"  autocomplete="new-password" placeholder="Password" required>
+                    </div>
+                    <div class="form-group mt-4">
+                        <input type="password"  id="password_confirmation" name="password_confirmation" autocomplete="new-password" placeholder="Confirm Password" required>
+                    </div>
+                    
+                    <div class="form-group mt-4">
+                        <button type="submit" class="form-control btn btn-primary submit px-3">Sign Up</button>
+                    </div>
+
+                    
+                </form>
+                <div class="account-bottom mt-3">
+                    <span class="d-block cate pt-10">Already Registered ? <a href="{{route('login')}}">Login</a></span>
+                </div>
             </div>
-        </form>
-    </x-jet-authentication-card>
-</x-guest-layout>
+        </div>
+    </div>
+    <!-- Login Section Section Ends Here -->
+@endsection

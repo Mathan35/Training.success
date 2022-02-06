@@ -13,6 +13,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call([AdminSeeder::class,CountrySeeder::class,SettingSeeder::class]);
+        $this->call([AdminSeeder::class,CountrySeeder::class,SettingSeeder::class,RoleSeeder::class,PermissionGroupSeeder::class,PermissionSeeder::class,RolePermissionSeeder::class]);
     }
 }

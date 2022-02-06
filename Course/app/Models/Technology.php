@@ -19,4 +19,11 @@ class Technology extends Model
         'image',
         'description',
     ];
+
+
+     //for roles to permissio
+     public function Course()
+     {
+         return $this->belongsToMany(Course::class, 'course_technologies');
+     }
 }

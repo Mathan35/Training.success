@@ -11,6 +11,10 @@ use App\Http\Controllers\CourseTitleDescriptionController;
 use App\Http\Controllers\PgDegreeController;
 use App\Http\Controllers\UgDegreeController;
 use App\Http\Controllers\BatchController;
+use App\Http\Controllers\CategoryTechnologyController;
+use App\Http\Controllers\CategoryCourseController;
+use App\Http\Controllers\RolePermissionController;
+use App\Http\Controllers\AdminUserController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -33,9 +37,13 @@ Route::get('/user-registration',[HomeController::class, 'register'])->name('user
 Route::post('auth-login',[LoginController::class, 'Login'])->name('auth-login');
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function(){
-
     
 Route::get('dashboard',[HomeController::class, 'Dashboard'])->name('dashboard');
+
+Route::get('user-profile',[HomeController::class, 'UserProfile'])->name('profile.show');
+
+//update profile
+Route::post('update-profile',[HomeController::class, 'UpdateProfile'])->name('update-profile');
 
 //ug degree
 Route::resource('ug-degree', UgDegreeController::class);
@@ -56,9 +64,12 @@ Route::get('enquiry/{id}',[HomeController::class, 'Enquiry'])->name('enquiry');
 Route::get('view-enquiry',[HomeController::class, 'ViewEnquiry'])->name('view-enquiry');
 
 //admin routes
-Route::middleware('IsAdmin')->group(function(){
-
+Route::prefix('admin')->middleware('can:CheckAdmin,App\Models\User')->group(function(){
+//admin-dashboar
 Route::get('admin-dashboard',[AdminController::class, 'AdminDashboard'])->name('admin-dashboard');
+
+//admin-profile
+Route::get('admin-profile',[AdminController::class, 'AdminProfile'])->name('admin-profile');
 
 //technology
 Route::resource('technology', TechnologyController::class);
@@ -78,8 +89,20 @@ Route::resource('batch', BatchController::class);
 //course title
 Route::resource('course-title', CourseTitleController::class);
 
+//course technology
+Route::resource('category-technology', CategoryTechnologyController::class);
+
+//course title
+Route::resource('category-course', CategoryCourseController::class);
+
 //course title description
 Route::resource('course-title-description', CourseTitleDescriptionController::class);
+
+//role permission
+Route::resource('role-permission', RolePermissionController::class);
+
+//role permission
+Route::resource('admin-user', AdminUserController::class);
 
 //view enquiry
 Route::get('enquiry-list/{status}',[AdminController::class, 'EnquiryList'])->name('enquiry-list');
@@ -135,5 +158,12 @@ Route::post('update-settings',[AdminController::class, 'UpdateSettings'])->name(
 
 });
 
-
 });
+
+//route for search courses
+Route::get('search-autocomplete', [HomeController::class, 'SearchAutocomplete'])->name('search-course');
+Route::get('search-result', [HomeController::class, 'SearchResult'])->name('search-result');
+Route::get('search-category/{id}', [HomeController::class, 'SearchCategory'])->name('search-category');
+Route::get('all-courses/', [HomeController::class, 'AllCourses'])->name('all-courses');
+
+

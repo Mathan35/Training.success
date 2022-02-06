@@ -9,6 +9,8 @@ use App\Models\CourseTechnology;
 use App\Models\CourseTitle;
 use App\Models\CourseTitleDetail;
 use App\Models\Technology;
+use App\Models\Role;
+use App\Models\Permission;
 use Illuminate\Http\Request;
 use App\Helpers\Validate;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -71,6 +73,15 @@ trait Validate{
         }
        
 
+    }
+
+    public function getPermissions($permission){
+        $Role = Role::find(auth()->user()->role);
+        $GetPermissions = $Role->permissions()->get()->toArray();
+        $colection = collect($GetPermissions); 
+        $UserPermissions = $colection->pluck('name')->toArray();
+        $validatePermission = in_array($permission,$UserPermissions);
+        return $validatePermission;
     }
 
 }

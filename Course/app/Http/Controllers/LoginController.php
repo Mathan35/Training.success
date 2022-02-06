@@ -37,8 +37,8 @@ class LoginController extends Controller
             $DateTime->last_login = Carbon::now()->toDateTimeString();
             $DateTime->save();
 
-            if(auth()->user()->role == "1"){
-                return redirect()->intended('admin-dashboard');
+            if(auth()->user()->role != "0"){
+                return redirect()->intended('admin/admin-dashboard');
             }
             return redirect()->intended('dashboard');
         }

@@ -67,8 +67,7 @@ trait General{
         $GetEnquiry = Enquiry::whereIn('enquiry_id',$EnquiryId)->with('Payment')->get();
         return $GetEnquiry;
     }
-    public function hello(){
-        return 'hai da';
-    }
+    
+ 
 
 }
